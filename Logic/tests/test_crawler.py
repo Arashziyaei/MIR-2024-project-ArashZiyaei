@@ -1,7 +1,7 @@
 import json
 from typing import List
 
-
+# link to completed crawled_files.json: https://drive.google.com/file/d/1EzsMAh9AixZczzf23YBUGW2HA9WcwcVS/view?usp=sharing
 def type_check(obj, expected_type):
     if not hasattr(expected_type, "__origin__"):
         return isinstance(obj, expected_type)
