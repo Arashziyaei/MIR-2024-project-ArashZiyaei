@@ -21,3 +21,18 @@ git fetch --all
 
 ## General Structure
 The project contains 2 main modules: [Logic](./Logic/README.md) and [UI](./UI/README.md). The `Logic` module is responsible for doing the main tasks of the project and the `UI` module is responsible for providing a user interface for the user to interact with the system. In each task, you will be told to implement a part or a whole file in one of these modules. Please read the comments for each file and functions inside it to understand what you need to do.
+
+## Report - Phase 1:
+### 1. Indexing
+#### link to index files:
+```bash
+https://drive.google.com/drive/folders/1L5kjIBJRcMHgkAXbB2mPg--gxsCWve0B?usp=sharing
+```
+<img src="./Index_test.jpg" alt="IMDb Logo" width="100%" height="auto" />
+
+### 2. Evaluation: 
+<img src="./Evaluation_test1.jpg" alt="IMDb Logo" width="100%" height="auto" />
+<img src="./Evaluation_test2.jpg" alt="IMDb Logo" width="100%" height="auto" />
+
+### 3. LSH: 
+<img src="./LSH_test.jpg" alt="IMDb Logo" width="100%" height="auto" />

@@ -1,13 +1,15 @@
 from typing import Dict, List
-from core.search import SearchEngine
-from core.spell_correction import SpellCorrection
-from core.snippet import Snippet
-from core.indexes_enum import Indexes, Index_types
+from .core.search import SearchEngine
+from .core.spell_correction import SpellCorrection
+from .core.snippet import Snippet
+from .core.indexer.indexes_enum import Indexes, Index_types
 import json
 
-movies_dataset = None  # TODO
-search_engine = SearchEngine()
 
+movies_dataset = None  # TODO
+with open('/Users/arashziyaei/sharif university/UNI/term6/MIR/project/MIR-2024-project-ArashZiyaei/logic/core/crawled_files.json', 'r') as f:
+    movies_dataset = json.load(f)
+search_engine = SearchEngine()
 
 def correct_text(text: str, all_documents: List[str]) -> str:
     """
@@ -43,29 +45,37 @@ def search(
 
     Parameters
     ---------------------------------------------------------------------------------------------------
+    query:
+        The query text
+
     max_result_count: Return top 'max_result_count' docs which have the highest scores.
                       notice that if max_result_count = -1, then you have to return all docs
 
-    mode: 'detailed' for searching in title and text separately.
-          'overall' for all words, and weighted by where the word appears on.
-
-    where: when mode ='detailed', when we want search query
-            in title or text not both of them at the same time.
-
     method: 'ltn.lnn' or 'ltc.lnc' or 'OkapiBM25'
 
-    preferred_genre: A list containing preference rates for each genre. If None, the preference rates are equal.
+    weights:
+        The list, containing importance weights in the search result for each of these items:
+            Indexes.STARS: weights[0],
+            Indexes.GENRES: weights[1],
+            Indexes.SUMMARIES: weights[2],
+
+    preferred_genre:
+        A list containing preference rates for each genre. If None, the preference rates are equal.
+        (You can leave it None for now)
 
     Returns
     ----------------------------------------------------------------------------------------------------
     list
     Retrieved documents with snippet
     """
-    weights = ...  # TODO
+    weights = {
+        Indexes.STARS: weights[0],
+        Indexes.GENRES: weights[1],
+        Indexes.SUMMARIES: weights[2],
+    }  # TODO
     return search_engine.search(
         query, method, weights, max_results=max_result_count, safe_ranking=True
     )
-
 
 def get_movie_by_id(id: str, movies_dataset: List[Dict[str, str]]) -> Dict[str, str]:
     """
@@ -84,18 +94,10 @@ def get_movie_by_id(id: str, movies_dataset: List[Dict[str, str]]) -> Dict[str, 
     dict
         The movie with the given id
     """
-    result = movies_dataset.get(
-        id,
-        {
-            "Title": "This is movie's title",
-            "Summary": "This is a summary",
-            "URL": "https://www.imdb.com/title/tt0111161/",
-            "Cast": ["Morgan Freeman", "Tim Robbins"],
-            "Genres": ["Drama", "Crime"],
-            "Image_URL": "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg",
-        },
-    )
-
+    result = {}
+    for doc in movies_dataset:
+        if doc['id'] == id:
+            result = doc
     result["Image_URL"] = (
         "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg"  # a default picture for selected movies
     )

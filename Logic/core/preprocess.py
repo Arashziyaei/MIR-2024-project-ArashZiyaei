@@ -21,7 +21,7 @@ class Preprocessor:
         self.punctuation = set(punctuation)
         self.documents = documents
         self.stopwords = []
-        self.path_to_stop_words = 'stopwords.txt'
+        self.path_to_stop_words = '/Users/arashziyaei/sharif university/UNI/term6/MIR/project/MIR-2024-project-ArashZiyaei/Logic/core/stopwords.txt'
         with open(self.path_to_stop_words, 'r') as file:
             self.stopwords = [word.strip() for word in file.readlines()]
 
@@ -34,10 +34,9 @@ class Preprocessor:
         List[str]
             The preprocessed documents.
         """
-        # TODO
         preprocessed_docs = []
         for document in self.documents:
-            if document is isinstance(str):
+            if isinstance(document, str):
                 document = self.preprocess_string(document)
             else:
                 if document['first_page_summary'] is not None:
@@ -70,18 +69,17 @@ class Preprocessor:
                     doc_reviews = document['reviews']
                     for reviews in doc_reviews:
                         if reviews is not None:
-                            preprocessed = [self.preprocess_string(reviews[0])]
+                            preprocessed = self.preprocess_string(reviews[0])
                             pr_reviews.append([preprocessed, reviews[1]])
                     document['reviews'] = pr_reviews
-
             preprocessed_docs.append(document)
-        return
+        return preprocessed_docs
 
     def preprocess_string(self, text: str):
         normalized_text = self.normalize(text)
         removed_links = self.remove_links(normalized_text)
         removed_punctuations = self.remove_punctuations(removed_links)
-        preprocessed_string = ''.join(self.remove_stopwords(removed_punctuations))
+        preprocessed_string = ' '.join(self.remove_stopwords(removed_punctuations))
         return preprocessed_string
 
     def normalize(self, text: str):
@@ -173,6 +171,6 @@ class Preprocessor:
         """
         tokens = self.tokenize(text)
         tokens = [token for token in tokens if
-                  token.lower() not in self.stop_words and token not in self.punctuation]
+                  token.lower() not in self.stopwords and token not in self.punctuation]
         return tokens
 
