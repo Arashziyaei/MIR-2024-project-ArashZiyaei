@@ -166,22 +166,17 @@ class Scorer:
             document_tf_idf = document_tf * document_idf
             document_vector.append(document_tf_idf)
 
+        query_norm = np.linalg.norm(np.array(query_vector))
+        document_norm = np.linalg.norm(np.array(document_vector))
+
         if query_method[2] == 'c':
-            query_vector = self.cosine_normalization(query_vector)
+            query_vector /= query_norm
 
         if document_method[2] == 'c':
-            document_vector = self.cosine_normalization(document_vector)
+            document_vector /= document_norm
 
         vector_space_model_score = np.dot(query_vector, document_vector)
         return vector_space_model_score
-
-    def cosine_normalization(self, vector):
-        norm = 0
-        for element in vector:
-            norm += element * element
-        norm = np.sqrt(norm)
-        normalized_vector = [element / norm for element in vector]
-        return normalized_vector
 
     def compute_socres_with_okapi_bm25(self, query, average_document_field_length, document_lengths):
         """
