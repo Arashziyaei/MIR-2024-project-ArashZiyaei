@@ -96,7 +96,7 @@ class MinHashLSH:
         permutations = [np.random.permutation(num_shingles) for _ in range(self.num_hashes)]
         for i in range(self.num_hashes):
             permutation = list(permutations[i])
-            check = [-1 for i in range(len(self.documents))]
+            check = [-1 for _ in range(len(self.documents))]
             for j in range(num_shingles):
                 index = permutation.index(j)
                 if -1 in check:

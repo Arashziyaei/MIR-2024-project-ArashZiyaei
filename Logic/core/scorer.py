@@ -155,13 +155,13 @@ class Scorer:
             query_tf_idf = query_tf * query_idf
             query_vector.append(query_tf_idf)
 
-            document_tf, document_idf = 1, 1
-            if document_id in self.index[term]:
+            document_tf, document_idf = 0, 1
+            if term in self.index and document_id in self.index[term]:
                 document_tf = self.index[term][document_id]
 
             if document_method[0] == 'l':
                 document_tf = np.log10(document_tf) + 1
-            if document_method[1] == 't':
+            if term in self.index and document_method[1] == 't':
                 document_idf = self.get_idf(term)
             document_tf_idf = document_tf * document_idf
             document_vector.append(document_tf_idf)
