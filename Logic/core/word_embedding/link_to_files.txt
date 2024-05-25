@@ -1,0 +1,2 @@
+the FastText_model.bin is not pushed due to file size limits.
+link to training data: https://drive.google.com/file/d/1qO0AR6dj2O87N_8cZQXsL8hWiEWtDsbR/view?usp=sharing
