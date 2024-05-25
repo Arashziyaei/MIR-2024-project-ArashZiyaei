@@ -1,13 +1,13 @@
 from typing import Dict, List
 from .core.search import SearchEngine
-from .core.spell_correction import SpellCorrection
-from .core.snippet import Snippet
+from .core.utility.spell_correction import SpellCorrection
+from .core.utility.snippet import Snippet
 from .core.indexer.indexes_enum import Indexes, Index_types
 import json
 
 
 movies_dataset = None  # TODO
-with open('/Users/arashziyaei/sharif university/UNI/term6/MIR/project/MIR-2024-project-ArashZiyaei/logic/core/crawled_files.json', 'r') as f:
+with open('/Users/arashziyaei/sharif university/UNI/term6/MIR/project/MIR-2024-project-ArashZiyaei/logic/core/IMDB_crawled.json', 'r') as f:
     movies_dataset = json.load(f)
 search_engine = SearchEngine()
 
@@ -37,6 +37,9 @@ def search(
     max_result_count: int,
     method: str = "ltn-lnn",
     weights: list = [0.3, 0.3, 0.4],
+    unigram_smoothing = None,
+    alpha = 0.5,
+    lamda = 0.5,
     should_print=False,
     preferred_genre: str = None,
 ):
@@ -74,7 +77,7 @@ def search(
         Indexes.SUMMARIES: weights[2],
     }  # TODO
     return search_engine.search(
-        query, method, weights, max_results=max_result_count, safe_ranking=True
+        query, method, weights, max_results=max_result_count, safe_ranking=False, smoothing_method=unigram_smoothing, alpha=alpha, lamda=lamda,
     )
 
 def get_movie_by_id(id: str, movies_dataset: List[Dict[str, str]]) -> Dict[str, str]:
