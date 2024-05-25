@@ -325,7 +325,7 @@ class Evaluation:
         """
         
         #TODO: Log the evaluation metrics using Wandb
-        wandb.login(key='40035ef77f60626a08ebae8926ea1d361d5b785b')
+        wandb.login(key='f76f8878804e4bbb0c2610cf4eabbd0872a5c312')
         wandb.init('project')
         wandb.log({
             "Precision": precision,

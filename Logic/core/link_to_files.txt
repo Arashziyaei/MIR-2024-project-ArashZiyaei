@@ -1,0 +1,4 @@
+link to json files:
+crawled data: https://drive.google.com/file/d/1PyepkdcpfP0zj1mPSDQTO_dV-cCHp8Tn/view?usp=sharing
+IMDB data: https://drive.google.com/file/d/17caNkj_H-zLSWzRTEyj7PS4y6kP0rfxx/view?usp=sharing
+preprocessed data: https://drive.google.com/file/d/1aazZzBivK5zcHwpLDAUAlsRSMPAxd107/view?usp=sharing
