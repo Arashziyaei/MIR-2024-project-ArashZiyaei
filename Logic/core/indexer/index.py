@@ -3,8 +3,8 @@ import os
 import json
 import copy
 import nltk
-from Logic.core.preprocess import Preprocessor
-from indexes_enum import Indexes
+from Logic.core.utility.preprocess import Preprocessor
+from Logic.core.indexer.indexes_enum import Indexes
 
 class Index:
     def __init__(self, preprocessed_documents: list):
