@@ -27,7 +27,7 @@ This module aims to predict the genre of movies based on their first page summar
    - Save the fine-tuned BERT model to the Hugging Face Model Hub for easy access and sharing.
 
 
-## report
+## report of phase 3
 + Genre distribution plot
 <img src="top_genres.jpg" alt="IMDb Logo" width="100%" height="auto" />
 + fine-tuning BERT  and Evaluation
